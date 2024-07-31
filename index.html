@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Lyrics Sync</title>
+    <style>
+        body {
+             font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #21213b; /* No background */
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .left-side {
+            flex: 1;
+            text-align: left;
+        }
+		
+        h1 {
+		color: #848aba;
+            margin: 0;
+           /// padding: 10px;
+            font-size: 44px;
+        }
+
+        .song-info {
+		line-height: 1.9;
+            font-size: 16px; /* Smaller font size for artist and composer */
+            color: #5a5f80; /* Light color */
+            margin: 0;
+           padding-top: 10px;
+		   padding-bottom: 10px;
+        }
+        
+        .right-side {
+            flex: 0 0 auto;
+            width: 150px; /* Adjust width of the CD section */
+            position: relative;
+        }
+        audio {
+            margin: 20px 0;
+        }
+        #lyrics {
+            color: #bcc1e3;
+            font-size: 24px;
+            line-height: 1.5;
+            height: 240px; /* Height to show a few lines of lyrics */
+            overflow: hidden;
+            position: relative;
+            padding-top: 0px;
+        }
+        .lyric {
+            opacity: 0.5; /* Dim inactive lyrics */
+            transition: opacity 0.5s;
+            margin: 10px 0; /* Margin between lines */
+        }
+        .active {
+            opacity: 1; /* Highlight active lyric */
+            font-weight: bold; /* Make the active lyric bold */
+        }
+        #cd {
+            position: absolute;
+            top: -20px;
+            right: 90px;
+            width: 600px; /* Adjust size of the CD */
+            height: 600px; /* Adjust size of the CD */
+            background-image: url('src/AlbumCD.png'); /* CD image */
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            animation-play-state: paused; /* Start with paused state */
+            transition: animation 0.5s ease; /* Smooth transition for animation start/pause */
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h1>My Creative Odyssey</h1>
+            <div class="song-info">
+                <div>Artist: Suno</div>
+                <div>Composer: Nguyen Tuan Danh</div>
+            </div>
+            <audio id="audio" controls>
+                <source src="src/TheCreativeOdyssey.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <div id="lyrics">
+                <div class="lyric">Yo, step in the zone, it's time to rep Vietnam,</div>
+                <div class="lyric">32 years young, creative designer, bomb.</div>
+                <div class="lyric">Portfolio thick, like a novel in the night,</div>
+                <div class="lyric">Projects on projects, all shades and light.</div>
+                <div class="lyric">Ventured the world, canvas in my hand,</div>
+                <div class="lyric">Brushstrokes dance, landscapes expand.</div>
+                <div class="lyric">From logos to murals, each piece a story,</div>
+                <div class="lyric">Mindscape mosaic, bask in the glory.</div>
+                <div class="lyric">Creative blaze, set the stage all aglow,</div>
+                <div class="lyric">Designer trails, none can match my flow.</div>
+                <div class="lyric">Innovation in my veins, ideas overflow,</div>
+                <div class="lyric">Creative designer, watch my prowess grow.</div>
+                <div class="lyric">From Ha Long Bay to Saigon streets,</div>
+                <div class="lyric">Visionary feats, my creations meet.</div>
+                <div class="lyric">Websites and prints, digital delight,</div>
+                <div class="lyric">Colors and lines, my muse ignites.</div>
+                <div class="lyric">Brainstorms thunder, lightning strikes,</div>
+                <div class="lyric">Concept sparks, like a motorbike.</div>
+                <div class="lyric">From drafts to drafts, I never tire,</div>
+                <div class="lyric">Fueled by passion, heart's desire.</div>
+                <div class="lyric">Interactive realms, VR dreams,</div>
+                <div class="lyric">Augmented life, bursting at seams.</div>
+                <div class="lyric">Imagination wild, untamed beast,</div>
+                <div class="lyric">On the crest of new, always feast.</div>
+                <div class="lyric">Ventured the world, canvas in my hand,</div>
+                <div class="lyric">Brushstrokes dance, landscapes expand.</div>
+                <div class="lyric">From logos to murals, each piece a story,</div>
+                <div class="lyric">Mindscape mosaic, bask in the glory.</div>
+                <div class="lyric">Creative blaze, set the stage all aglow,</div>
+                <div class="lyric">Designer trails, none can match my flow.</div>
+                <div class="lyric">Innovation in my veins, ideas overflow,</div>
+                <div class="lyric">Creative designer, watch my prowess grow.</div>
+                <div class="lyric">Creative blaze, set the stage all aglow,</div>
+                <div class="lyric">Designer trails, none can match my flow.</div>
+                <div class="lyric">Innovation in my veins, ideas overflow,</div>
+                <div class="lyric">Creative designer, watch my prowess grow.</div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div id="cd"></div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const lyrics = document.querySelectorAll('.lyric');
+        const lyricsContainer = document.getElementById('lyrics');
+        const cd = document.getElementById('cd');
+        const displayCount = 4; // Number of visible lines
+
+        const lyricTimings = [
+            { time: 0.385, lyricIndex: 0 },
+            { time: 2.964, lyricIndex: 1 },
+            { time: 5.486, lyricIndex: 2 },
+            { time: 7.907, lyricIndex: 3 },
+            { time: 10.581, lyricIndex: 4 },
+            { time: 12.478, lyricIndex: 5 },
+            { time: 15.295, lyricIndex: 6 },
+            { time: 17.871, lyricIndex: 7 },
+            { time: 20.333, lyricIndex: 8 },
+            { time: 22.429, lyricIndex: 9 },
+            { time: 24.815, lyricIndex: 10 },
+            { time: 27.531, lyricIndex: 11 },
+            { time: 30.498, lyricIndex: 12 },
+            { time: 32.463, lyricIndex: 13 },
+            { time: 34.892, lyricIndex: 14 },
+            { time: 37.336, lyricIndex: 15 },
+            { time: 40.183, lyricIndex: 16 },
+            { time: 42.231, lyricIndex: 17 },
+            { time: 44.665, lyricIndex: 18 },
+            { time: 47.276, lyricIndex: 19 },
+            { time: 59.430, lyricIndex: 20 },
+            { time: 62.063, lyricIndex: 21 },
+            { time: 64.388, lyricIndex: 22 },
+            { time: 66.886, lyricIndex: 23 },
+            { time: 69.541, lyricIndex: 24 },
+            { time: 71.758, lyricIndex: 25 },
+            { time: 74.243, lyricIndex: 26 },
+            { time: 76.665, lyricIndex: 27 },
+            { time: 79.149, lyricIndex: 28 },
+            { time: 81.302, lyricIndex: 29 },
+            { time: 83.773, lyricIndex: 30 },
+            { time: 86.251, lyricIndex: 31 },
+            { time: 98.446, lyricIndex: 32 },
+            { time: 100.802, lyricIndex: 33 },
+            { time: 103.260, lyricIndex: 34 },
+            { time: 105.824, lyricIndex: 35 }
+        ];
+
+        audio.addEventListener('timeupdate', () => {
+            const currentTime = audio.currentTime;
+            lyricTimings.forEach((timing) => {
+                if (currentTime >= timing.time) {
+                    // Remove active class from all lyrics
+                    lyrics.forEach(lyric => lyric.classList.remove('active'));
+                    
+                    // Add active class to current lyric
+                    lyrics[timing.lyricIndex].classList.add('active');
+
+                    // Scroll to center the active line
+                    const activeIndex = timing.lyricIndex;
+
+                    // Calculate the scroll position
+                    let scrollToIndex = activeIndex - Math.floor(displayCount / 2);
+                    if (scrollToIndex < 0) scrollToIndex = 0; // Adjust if it goes below 0
+                    if (scrollToIndex > lyrics.length - displayCount) {
+                        scrollToIndex = lyrics.length - displayCount; // Adjust if it goes beyond the last available lyrics
+                    }
+
+                    // Scroll smoothly to the calculated position
+                    const scrollPosition = lyrics[scrollToIndex].offsetTop;
+                    lyricsContainer.scrollTo({
+                        top: scrollPosition,
+                        behavior: 'smooth' // Smooth scroll effect
+                    });
+                }
+            });
+        });
+
+        // Control CD spinning animation based on audio play/pause state
+        audio.addEventListener('play', () => {
+            cd.style.animationPlayState = 'running';
+        });
+
+        audio.addEventListener('pause', () => {
+            cd.style.animationPlayState = 'paused';
+        });
+
+        audio.addEventListener('ended', () => {
+            cd.style.animationPlayState = 'paused';
+        });
+    </script>
+</body>
+</html>
